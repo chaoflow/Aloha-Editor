@@ -91,7 +91,8 @@
                 //Top-level bundle.
                 masterName = name;
                 suffix = match[4];
-                locale = config.locale || (config.locale =
+                locale = config.locale || (
+                    config.locale =
                         typeof navigator === "undefined" ? "root" :
                         (navigator.language ||
                          navigator.userLanguage || "root").toLowerCase());
@@ -132,18 +133,18 @@
                             }
                             require.mixin(value, partBundle);
                         }
-						
-						// MODIFICATION FROM ALOHA START: add a t() function
-						value.t = function(key) {
-							if (this[key]) {
-								return this[key];
-							} else {
-								return key;
-							}
-						}
-						// END OF ALOHA MODIFICATION
 
-						//All done, notify the loader.
+                        // MODIFICATION FROM ALOHA START: add a t() function
+                        value.t = function(key) {
+                            if (this[key]) {
+                                return this[key];
+                            } else {
+                                return key;
+                            }
+                        };
+                        // END OF ALOHA MODIFICATION
+
+                        //All done, notify the loader.
                         onLoad(value);
                     });
                 });
