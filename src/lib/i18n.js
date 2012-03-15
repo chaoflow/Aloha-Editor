@@ -62,6 +62,16 @@
         }
     }
 
+    // slightly adapted mixin function that used to be exposed as require.mixin
+    var empty = {};
+    function mixin(target, source, force) {
+        for (var prop in source) {
+            if (!(prop in empty) && (!(prop in target) || force)) {
+                target[prop] = source[prop];
+            }
+        }
+    }
+
     define({
         version: '0.24.0',
         /**
@@ -131,7 +141,7 @@
                             if (partBundle === true || partBundle === 1) {
                                 partBundle = req(prefix + part + '/' + suffix);
                             }
-                            require.mixin(value, partBundle);
+                            mixin(value, partBundle);
                         }
 
                         // MODIFICATION FROM ALOHA START: add a t() function
