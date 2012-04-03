@@ -242,6 +242,13 @@ function ( jQuery, PluginManager ) {
 			var
 				plugins = jQuery('[data-aloha-plugins]').data('aloha-plugins');
 
+			// WTA: extension from https://github.com/alohaeditor/Aloha-Editor/issues/384
+			// WTA: will be part of 0.21 Aloha release as well.
+			// load aloha plugins from config
+			if ( Aloha.settings && Aloha.settings.plugins && Aloha.settings.plugins.load ) {
+				plugins = Aloha.settings.plugins.load;
+			}
+
 			// Determine Plugins
 			if ( typeof plugins === 'string' && plugins !== "") {
 				return plugins.replace(/\s+/g, '').split(',');
